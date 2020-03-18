@@ -84,7 +84,5 @@ public class WormHoleBinary {
 			if (weights.get(i).get(k) >= test)
 				dfs(AdjList.get(i).get(k), currentComp, test);
 		}
-	}
-
-	
+	}	
 }

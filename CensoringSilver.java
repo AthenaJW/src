@@ -4,53 +4,40 @@ import java.util.*;
 public class CensoringSilver {
 	public static void main(String[] args) throws IOException, InterruptedException
 	{
-		//BufferedReader br = new BufferedReader(new FileReader("censor.in"));
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader br = new BufferedReader(new FileReader("4.in"));
+		//BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String output = br.readLine();
 		char[] censor = br.readLine().toCharArray();
-		//preprocessing
-		int[] preprocessed = new int[censor.length];
-		int j = 0;
-		for (int i = 1; i < censor.length; i++)
-		{
-			if (censor[j] == censor[i])
-				preprocessed[i] = j;
-			else if (j!=0)
-			{
-				j=0;
-				i--;
-			}
-		}
+		int[] b = new int[censor.length+1];			// back table where we have all the reset j values, i.e. if you mess up at position i, b[i] is the j you should now check
+		int[] reset = new int[output.length()+1]; 	// reset table serves as the back table for the entire string. if you arrive at position i, reset[i] is the j you should assume to check
+		int j = -1; 								//j is -1 or else the algorithm will find the string is equal to itself. obviously
 		int i = 0;
-		j = 0;
-		int[] previous = new int[output.length()];
+		b[0] = -1;
+		//preprocessing
+		while (i < censor.length)
+		{
+			while (j >= 0 && censor[i] != censor[j]) //while different, reset j to it's back table value. this is not zero if the back table value is also a prefix of the whole string
+				j = b[j];
+			i++; j++; 								//advance the pointers if they are the same
+			b[i] = j; 								//save the back table value 
+		}
+		
+		i = 0; j = 0; //actually doing KMP
 		while (i < output.length())
 		{
-			if (output.charAt(i) == censor[j])
-			{
-				j++;
-				if (i < output.length()-1 && j < censor.length)
-					previous[++i] = j;
-				else
-					i++;
-			}
-			if (j==censor.length)
-			{
-				output = output.substring(0, i-censor.length) + output.substring(i);
-				i -= censor.length;
-				j = previous[i];
-			}
-			else if (i < output.length() && output.charAt(i) != censor[j])
-			{
-				if (j!=0)
-				{
-					previous[i] = j;
-					j = preprocessed[j];
-				}
-				else
-					i++;
+			while (j >= 0 && output.charAt(i) != censor[j]) //while the values are different, reset it to the back table value.
+				j = b[j];
+			i++; j++; 										//else advance the pointers
+			reset[i] = j; 									//save the current value of j into the back table
+			if (j == censor.length) 						//if j has advanced to the end
+			{	
+				output = output.substring(0, i - censor.length) + output.substring(i); //remove the instance of the string
+				i -= censor.length; 						//move i back to the last character we have reset information on
+				if (i < 0) i = 0; 							//just in case i goes negative
+				j = reset[i]; 								//reset j to the reset value at i
 			}
 		}
+
 		//PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("censor.out")));
 		//pw.println(output);
 		//pw.close();

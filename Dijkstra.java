@@ -28,10 +28,10 @@ public class Dijkstra {
 		while (!pq.isEmpty())
 		{
 			el = pq.poll();
-			if (el[0] > distances[el[1]])
+			if (el[0] >= distances[el[1]]) //if we already got to this point with a path that is more optimal, don't even relax this one's edges, because it couldn't be on the shortest path.
 				continue;
 			if (el[1] == endpoint)
-				continue;
+				break;
 			edges = AdjList.get(el[1]);
 			for (int i = 0; i < edges.size(); i++)
 			{
