@@ -4,7 +4,6 @@ public class Dijkstra {
 	public static void main(String[] args)
 	{
 		int num = 10; // change to number of nodes
-		PriorityQueue<int[]> pq = new PriorityQueue<int[]>(); 
 		Comparator<int[]> c = new Comparator<int[]>()
 		{
 			public int compare(int[] o1, int[] o2)
@@ -12,6 +11,8 @@ public class Dijkstra {
 				return o1[0] - o2[0]; //ascending by distance
 			}
 		};
+		PriorityQueue<int[]> pq = new PriorityQueue<int[]>(c); 
+
 		ArrayList<ArrayList<Integer>> AdjList = new ArrayList<ArrayList<Integer>>();
 		ArrayList<ArrayList<Integer>> weights = new ArrayList<ArrayList<Integer>>();
 		//initialize adjacency list
@@ -28,7 +29,7 @@ public class Dijkstra {
 		while (!pq.isEmpty())
 		{
 			el = pq.poll();
-			if (el[0] >= distances[el[1]]) //if we already got to this point with a path that is more optimal, don't even relax this one's edges, because it couldn't be on the shortest path.
+			if (el[0] > distances[el[1]]) //if we already got to this point with a path that is more optimal, don't even relax this one's edges, because it couldn't be on the shortest path.
 				continue;
 			if (el[1] == endpoint)
 				break;
