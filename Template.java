@@ -24,6 +24,8 @@ public class Template {
 		    else
 		        System.out.println("NO");
 		}
+		PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("homework.out")));
+		pw.close();
 		br.close();
 	}
 }

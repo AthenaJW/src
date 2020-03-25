@@ -5,7 +5,7 @@ public class CowJog {
 	public static void main(String[] args) throws IOException
 	{
 		//BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedReader br = new BufferedReader(new FileReader("cowjog.in"));
+		BufferedReader br = new BufferedReader(new FileReader("6.in"));
 		String[] temp = br.readLine().split(" ");
 		int N = Integer.parseInt(temp[0]);
 		int T = Integer.parseInt(temp[1]);
@@ -56,10 +56,10 @@ public class CowJog {
 			else if (!early[ID])
 				before.remove(x);
 		}
-		//System.out.println(groups);
-		PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("cowjog.out")));
-		pw.println(groups);
-		pw.close();
+		System.out.println(groups);
+		//PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("cowjog.out")));
+		//pw.println(groups);
+		//pw.close();
 		br.close();
 	}
 	static class Event
