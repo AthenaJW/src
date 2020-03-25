@@ -24,6 +24,8 @@ This is mostly for my own reference. Things are in alphabetical order. Sorry for
 * Piggyback - BFS
 * MilkVisits - DFS to find disconnected componenets in a graph
 * CowCrossTheRoad3 - 2D grid with implicit graph
+* LuxuryRiverCruise - Floyd's tortoise and hare cycle finding algorithm([Video](https://www.youtube.com/watch?v=pKO9UjSeLew))
+* LuxuryRiverCruise - non traditional cycle finding / graph formulation.
 
 
 
