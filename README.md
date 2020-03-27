@@ -26,6 +26,9 @@ This is mostly for my own reference. Things are in alphabetical order. Sorry for
 * CowCrossTheRoad3 - 2D grid with implicit graph
 * LuxuryRiverCruise - Floyd's tortoise and hare cycle finding algorithm([Video](https://www.youtube.com/watch?v=pKO9UjSeLew))
 * LuxuryRiverCruise - non traditional cycle finding / graph formulation.
+* Tractor - BFS for shortest path on a grid
+### String Sorting/Prefix matching
+* AutoCompletion
 
 
 
